@@ -50,6 +50,7 @@
 13. If they type `"y"`, set `n1 = result`.
 14. Otherwise, ask for a new first number and store it in `n1`.
 
+
 **Extension, once you've done Week 4:** replace the `if`/`elif` in step 10
 with a dictionary:
 `operations = {"+": add, "-": subtract, "*": multiply, "/": divide}`
