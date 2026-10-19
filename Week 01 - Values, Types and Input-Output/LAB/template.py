@@ -59,14 +59,13 @@ print(f"{'Total (GB)':<20}:{second:>12.2f}")
 print(f"{'Free (GB)':<20}:{difference:>+12.2f}")
 print(f"{'Percent Used':<20}:{percent:>11.2f} &")
 
-
 print("=" * 44)
 
 
 # ==========================================================================
 # 4. Before you finish:
 #
-#    [ ] Run it three times with different numbers
-#    [ ] Run it with a total of 0 and write the error in your journal
-#    [ ] Check every variable name says what it holds
-#    [ ] Show it to the person next to you
+#    [YES] Run it three times with different numbers
+#    [YES] Run it with a total of 0 and write the error in your journal
+#    [YES] Check every variable name says what it holds
+#    [YES] Show it to the person next to you
