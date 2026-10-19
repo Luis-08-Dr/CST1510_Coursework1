@@ -3,4 +3,4 @@
 
 value = input("Value: ")
 
-print(value + 1)
+print(str(value))

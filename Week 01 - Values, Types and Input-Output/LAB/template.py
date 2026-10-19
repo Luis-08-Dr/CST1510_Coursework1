@@ -2,9 +2,9 @@
 RECORD CHECK  -  my version
 ===========================
 
-Name  :
-Lane  :  AI / Cyber / IT      (delete two)
-Date  :
+Name  :  Luis Fernandes
+Lane  :  IT      
+Date  :  26/09/26
 
 Run it:   python template.py
 
@@ -21,9 +21,10 @@ Delete these instructions as you replace them with your code.
 #
 #    Remember: input() always gives back text.
 
-label = ""      # : replace with an input() call
-first = 0.0     # : replace with an input() call, converted
-second = 0.0    # : replace with an input() call, converted
+label = input("Enter the server hostname: ")
+
+first = float(input("Enter storage used in GB: "))
+second = float(input("Enter total storage in GB: "))
 
 
 # ================================================================== PROCESS
@@ -34,8 +35,8 @@ second = 0.0    # : replace with an input() call, converted
 #
 #    Do not type the answers. Calculate them.
 
-difference = 0.0   # 
-percent = 0.0      # 
+difference = second - first
+percent = (first / second) * 100
 
 
 # =================================================================== OUTPUT
@@ -49,13 +50,17 @@ percent = 0.0      #
 #              f"{value:>+10.2f}"   the same, but always shows the sign
 
 print()
-print("=" * 34)
+print("=" * 44)
 print(f"  RECORD CHECK  -  {label}")
-print("=" * 34)
+print("=" * 44)
 
-# : your report lines go here
+print(f"{'Used (GB)':<20}:{first:>12.2f}")
+print(f"{'Total (GB)':<20}:{second:>12.2f}")
+print(f"{'Free (GB)':<20}:{difference:>+12.2f}")
+print(f"{'Percent Used':<20}:{percent:>11.2f} &")
 
-print("=" * 34)
+
+print("=" * 44)
 
 
 # ==========================================================================

@@ -1,6 +1,6 @@
 # BROKEN ON PURPOSE.
 # Run it, type 23.7 when asked, read the last line, then fix it.
 
-value = int(input("Value: "))
+value = (input("Value: "))
 
-print(value)
+print(float(value))
