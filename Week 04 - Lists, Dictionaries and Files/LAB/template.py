@@ -21,32 +21,6 @@ Delete these instructions as you replace them with your code.
 
 # your function(s) go here
 
-def check_record(value, limit):
-    """Calculate the difference, percentage and status."""
-    difference = value - limit
-
-    if limit == 0:
-        percent = 0
-    else:
-        percent = (value / limit) * 100
-
-    if value > limit:
-        status = "OVER LIMIT"
-    else:
-        status = "OK"
-
-    return difference, percent, status
-
-def print_report(label, value, limit, difference, percent, status):
-    """Print one report for a sever."""
-
-    print(
-        f"{label}: {value} GB used / {limit} GB total, "
-        f"difference: {difference} GB, "
-        f"usage: {percent:.1f}%, status: {status}"
-    )
-
-
 # ====================================================================== STORE
 # 2. Get your records into a list of dicts, each shaped like:
 #        {"label": ..., "value": ..., "limit": ...}
