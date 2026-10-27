@@ -2,9 +2,9 @@
 RECORD CHECK  -  my version
 ===========================
 
-Name  :
-Lane  :  AI / Cyber / IT      (delete two)
-Date  :
+Name  : Luis Fernandes
+Lane  : IT      
+Date  : 07/10/26
 
 Run it:   python template.py
 
@@ -28,6 +28,34 @@ Delete these instructions as you replace them with your code.
 
 # your function(s) go here
 
+def status_of(percent):
+    """Return the status based on the percentage."""
+    if percent >= 100:
+        return "OVER LIMIT"
+    elif percent >= 90:
+        return "WARNING"
+    else:
+        return "OK"
+
+def check(value, limit):
+    """Calculate the difference and percentage."""
+    difference = limit - value
+    percent = (value / limit) * 100
+    return difference, percent
+
+def print_report(label, value, limit, difference, percent, status):
+    print()
+    print("=" * 40)
+    print(f" RECORD CHECK - {label:>10.2f}")
+    print("=" * 40)
+    print(f"{'Used':<12}: {value:>10.2f}")
+    print(f"{'Total':<12}: {limit:>10.2f}")
+    print(f"{'Free':<12}: {difference:>10.2f}")
+    print(f"{'Percent':<12}: {percent:>9.2f} %")
+    print(f"{'Status':<12}: {status:>10}")
+    print("=" * 40)
+
+
 
 # ==================================================================== INPUT
 # 2. Ask for your three values.
@@ -36,9 +64,9 @@ Delete these instructions as you replace them with your code.
 #    - the second is a NUMBER (use float(), not int())
 #    - the third  is a NUMBER (use float(), not int())
 
-label = ""      # replace with an input() call
-value = 0.0     # replace with an input() call, converted
-limit = 0.0     # replace with an input() call, converted
+label = ""
+value = 0.0
+limit = 0.0
 
 
 # ================================================================== PROCESS
@@ -64,14 +92,28 @@ status = ""          # replace with your code
 #                Keep count of how many came back OVER LIMIT and print that
 #                once, after the loop ends.
 
+over_limit_count = 0
+
+while True:
+    label = input("\nEnter hostname (or 'quit' to stop): ")
+
+    if label.lower() == "quit":
+        break
+
+    value = float(input("Enter GB used: "))
+    limit = float(input("Enter GB total: "))
+
+    difference, percent = check(value, limit)
+    status = status_of(percent)
+
+    print_report(label, value, limit, difference, percent, status)
+
+    if status == "OVER LIMIT":
+        over_limit_count += 1
+
 print()
-print("=" * 34)
-print(f"  RECORD CHECK  -  {label}")
-print("=" * 34)
+print(f"Records OVER LIMIT: {over_limit_count}")
 
-# your report lines go here
-
-print("=" * 34)
 
 
 # ==========================================================================
