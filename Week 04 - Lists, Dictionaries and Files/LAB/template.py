@@ -4,7 +4,7 @@ RECORD CHECK  -  my version
 
 Name  : Luis Fernandes
 Lane  : IT      
-Date  :18/10/2026
+Date  :14/10/2026
 
 Run it:   python template.py
 
@@ -20,6 +20,54 @@ Delete these instructions as you replace them with your code.
 #    one-line docstring.
 
 # your function(s) go here
+def check_record(value, limit):
+    """Calculates remaining storage, percentage and status."""
+
+    difference = limit - value
+    percent = (value / limit) * 100
+
+    if value > limit:
+        status = "OVER LIMIT"
+    else:
+        status = "OK"
+
+    return difference, percent, status
+
+# Printing the report.
+
+def print_report(label, value, limit, difference, percent, status):
+
+    print("------------------------------")
+    print("Hostname:", label)
+    print("GB Used:", value)
+    print("GB Total:", limit)
+    print("Remaining GB:", difference)
+    print("Usage:", round(percent, 2), "%")
+    print("Status:", status)
+
+    #Loads from a text file
+
+def load_records(path):
+    """Reading the computer records from a text file."""
+
+    records = []
+
+    with open(path, "r") as file:
+        for line in file:
+            parts = line.strip().split(",")
+
+            label = parts[0]
+            value = int(parts[1])
+            limit = int(parts[2])
+
+            records.append({
+                "label": label,
+                "value": value,
+                "limit": limit
+            })
+
+    return records
+
 
 # ====================================================================== STORE
 # 2. Get your records into a list of dicts, each shaped like:
@@ -32,7 +80,8 @@ Delete these instructions as you replace them with your code.
 #    Excellent : also write the results out to a new file (one line per
 #                record: label, status), as well as printing them.
 
-records = []   # replace with your code
+# load records from records.txt
+records = load_records('Week 04 - Lists, Dictionaries and Files/LAB/records.txt')
 
 
 # =============================================================== PROCESS + OUTPUT
@@ -42,6 +91,22 @@ records = []   # replace with your code
 #                print that once, after the loop ends.
 
 # your loop goes here
+
+# check and print each computer record
+for record in records:
+
+    difference, percent, status = check_record(
+        record["value"], record["limit"]
+    )
+
+    print_report(
+        record["label"],
+        record["value"],
+        record["limit"],
+        difference,
+        percent,
+        status
+    )
 
 
 # ==========================================================================
