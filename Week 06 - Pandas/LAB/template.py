@@ -2,9 +2,9 @@
 RECORD CHECK  -  my version
 ===========================
 
-Name  :
-Lane  :  AI / Cyber / IT      (delete two)
-Date  :
+Name  : Luis Fernandes
+Lane  : IT      
+Date  : 28/10/26
 
 Run it:   python template.py
 
@@ -13,13 +13,14 @@ Delete these instructions as you replace them with your code.
 """
 
 import pandas as pd
+import matplotlib.pyplot as plt
 
 # ==================================================================== LOAD
 # 1. Read your data file with pd.read_csv(). Make your own CSV, header row
 #    plus at least 5 data rows: label,value,limit (or your lane's own field
 #    names - same shape, different words).
 
-df = None   # replace with pd.read_csv("your_file.csv")
+df = pd.read_csv(r"C:\Users\luisf\OneDrive - Middlesex University\CST1510_Coursework1\Week 06 - Pandas\LAB\it_records.csv")
 
 
 # ================================================================= PROCESS
@@ -28,7 +29,13 @@ df = None   # replace with pd.read_csv("your_file.csv")
 #    Typical and above: also add a "status" column using .apply() with a
 #    lambda - "OVER LIMIT" (100%+), "WARNING" (90%+), otherwise "OK".
 
-# your column(s) go here
+df["percent"] = (df["used_gb"] / df["total_gb"]) * 100
+
+# adding status column
+
+df["status"] = df["percent"].apply(
+    lambda x: "OVER LIMIT" if x >= 100 else "WARNING" if x >= 90 else "OK"
+)
 
 
 # ================================================================== OUTPUT
@@ -42,6 +49,26 @@ df = None   # replace with pd.read_csv("your_file.csv")
 #                one bar chart of the counts per status.
 
 print(df)
+
+print("\nRecords needing attention:")
+print(df[df["status"] != "OK"])
+
+print("\nCount per status:")
+print(df.groupby("status").size())
+
+df.to_csv("it_records_report.csv", index=False)
+
+# Bar Chart
+df["status"].value_counts().plot(kind="bar")
+
+plt.title("IT Storage Status Counts")
+plt.xlabel("Status")
+plt.ylabel("Number of Servers")
+plt.tight_layout()
+
+plt.savefig("it_satus_counts.png")
+plt.show
+
 
 
 # ==========================================================================
