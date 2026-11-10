@@ -2,7 +2,8 @@
 # Run it, read the last line, then fix it.
 
 value_text = "87"
-value = float(value_text)
 
-cleaned = value.strip()
-print(cleaned)
+Cleaned = value_text.strip()
+value = float(Cleaned)
+
+print(value)
