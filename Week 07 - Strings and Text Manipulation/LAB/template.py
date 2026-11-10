@@ -2,9 +2,9 @@
 RECORD CHECK  -  my version
 ===========================
 
-Name  :
-Lane  :  AI / Cyber / IT      (delete two)
-Date  :
+Name  : Luis Fernandes
+Lane  : IT     
+Date  : 04/11/26
 
 Run it:   python template.py
 
@@ -22,6 +22,29 @@ Delete these instructions as you replace them with your code.
 #    one-line docstring.
 
 # your function(s) go here
+def parse_line(raw_line):
+    """Cleans and converts a raw IT server record into a dictionary."""
+
+    raw_line = raw_line.strip().lower()
+    fields = raw_line.split(",")
+
+    server = fields[0].strip()
+    used = int(fields[1].split("=")[1].strip())
+    total = int(fields[2].split("=")[1].strip())
+
+    return {"server": server, "used": used, "total": total}
+
+def status_of(used, total):
+    """checks server usage and returns its status."""
+
+    percent = (used / total) * 100
+
+    if percent >= 100:
+        return "OVER LIMIT"
+    elif percent >= 90:
+        return "WARNING"
+    else:
+        return "OK"
 
 
 # ====================================================================== INPUT
@@ -35,7 +58,13 @@ Delete these instructions as you replace them with your code.
 #    Excellent: save these lines to a file and load them with open() /
 #    a for loop over the file, instead of writing them directly here.
 
-raw_records = []   # replace with your code
+raw_records = [
+    "  Srv-01 , used=87 , total=100 ",
+    "SRV-02,USED=120,TOTAL=100",
+    " srv-03 , Used=45 , Total=100 ",
+    "  SRV-04, used=95,total=100 ",
+    "Srv-05 , USED=70 , TOTAL=100 "
+]
 
 
 # =============================================================== PROCESS + OUTPUT
@@ -46,8 +75,22 @@ raw_records = []   # replace with your code
 #    Excellent : print a one-line summary at the end - how many records,
 #                how many flagged.
 
+flagged = 0
+
 for raw_record in raw_records:
-    pass   # replace with your code
+    record = parse_line(raw_record)
+
+    status = status_of(record["used"], record["total"])
+
+    print(record)
+    print("Status:", status)
+    print()
+
+    if status != "OK":
+        flagged += 1
+
+print("Total records:", len(raw_records))
+print("Flagged records:", flagged)
 
 
 # ==========================================================================
